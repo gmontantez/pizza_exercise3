@@ -1,44 +1,57 @@
 crust = ["plain","garlic","stuffed"]
 meats = ["pepperoni","sausage","ham"]
-veggies = ["mushrooms","black_olives","green_peppers"]
+veggies = ["mushrooms","black olives","green peppers"]
 toppings = ["anchovies","chicken","spinach"]
 sauces = ["tomato","alfredo"]
-other_options = ["extra_cheese","double_pepperoni"]
+other_options = ["extra cheese","double pepperoni"]
 size = ["small","medium","large"]
+delivery = ["yes","no"]
 
-def size(cost)
-	if small pizza size(12.95) 
-   		puts "The cost is $12.95 for a small pizza with 3 toppings."
-   		puts "Okay, you would like #{pizzas} pizzas at $12.95 each."
-
-   	elsif medium pizza size(15.95)
-   		puts "The cost is $15.95 for a medium pizza with 3 toppings."
-   		puts "Okay, you would like #{pizzas} pizzas at $15.95 each."
-
-   	elsif large pizza size(18.95)
-   		puts "The cost is $18.95 for a large pizza with 3 toppings."
-   		puts "Okay, you would like #{pizzas} pizzas at $18.95 each."
-
+def cost(size)
+	if size == "small"
+      13.00
+	elsif size == "medium"
+      16.00
+   elsif size == "large"
+      19.00
+   end
 end
+
+def delivery_choice(delivery)
+   if delivery == "yes"
+      3.00
+   else 
+      0
+   end
+end
+
 
 puts "How many pizzas would you like?"
 pizzas = gets.chomp.to_i
 
-puts "What size pizza would you like?"
-size = gets.chomp
-puts "So, you would like a #{size} pizza at #{cost}."
-
-puts "What type of crust and what would you like on your pizza?"
-
+delivery_option = delivery.sample
+delivery_cost = delivery_choice(delivery_option)
 
 pizza = 1
+total_cost = 0
 while pizza <= pizzas do
+   pizza_size = size.sample
+   pizza_cost = cost(pizza_size)
+   puts "\nPizza #{pizza}"
+   puts "So, you would like a #{pizza_size} pizza at $#{pizza_cost}."
 	puts "You would like a #{crust.sample} crust, with #{sauces.sample} sauce, your toppings will be #{veggies.sample}, #{meats.sample} and #{toppings.sample}."  
-	puts "You would also like #{other_options.sample}."
+	puts "You would also like #{other_options.sample}.\n"
+   total_cost += pizza_cost
 	pizza +=1
-	end
+end
 
-
-total_cost = cost*pizzas
-
-puts "The total cost is $#{total_cost}."
+puts "\nThe total cost is $#{total_cost}."
+puts "\nYour choice for delivery is #{delivery_option}"
+puts "\nThe delivery cost is $#{delivery_cost}."
+if delivery_option == "yes"
+   puts "\nWhat would you like to tip?"
+   tip = gets.chomp.to_i
+else
+   tip = 0
+end
+puts "\nThe tip cost is $#{tip}."
